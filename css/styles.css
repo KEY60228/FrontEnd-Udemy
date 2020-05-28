@@ -8,21 +8,14 @@
     margin: 50px 0;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
     /*
-    font-size: 64px;
-    width:400px;
-    height: 200px;
-    box-shadow: 0 10px gray;
-  
-
-    &:active {
-      margin-top: 55px;
-      box-shadow: 0 5px gray;
+    &:hover {
+      background-color: $cBlack;
+      color: $cWhite;
     }
     */ }
-    #container .btn:hover {
-      background-color: black;
-      color: white; }
+    #container .btn.float:hover {
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); }
 
 /*# sourceMappingURL=styles.css.map */

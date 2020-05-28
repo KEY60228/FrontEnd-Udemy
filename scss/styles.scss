@@ -1,31 +1,30 @@
+$cWhite: white;
+$cBlack: black;
+
 #container {
   text-align: center;
 
   .btn {
-    background-color:white;
-    color: black;
-    border: 1px solid black;
+    background-color:$cWhite;
+    color: $cBlack;
+    border: 1px solid $cBlack;
     padding: 10px 40px;
     margin: 50px 0;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s;
     
-    &:hover {
-      background-color: black;
-      color: white;
+    &.float {
+
+      &:hover {
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+      }
     }
-
+    
     /*
-    font-size: 64px;
-    width:400px;
-    height: 200px;
-    box-shadow: 0 10px gray;
-  
-
-    &:active {
-      margin-top: 55px;
-      box-shadow: 0 5px gray;
+    &:hover {
+      background-color: $cBlack;
+      color: $cWhite;
     }
     */
   }
