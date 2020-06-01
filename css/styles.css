@@ -15,11 +15,20 @@
 @keyframes sk-bouncedelay {
   0% {
     transform: scale(0); }
-  40% {
-    transform: scale(1); }
-  80% {
-    transform: scale(0); }
   100% {
-    transform: scale(0); } }
+    transform: scale(1); } }
+.rect {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  animation: sk-bouncedelay 1.4s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: forwards; }
+
+.paused {
+  animation-play-state: paused; }
 
 /*# sourceMappingURL=styles.css.map */
