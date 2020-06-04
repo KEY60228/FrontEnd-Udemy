@@ -1,21 +1,25 @@
-a {
-  color: orange; }
-  a:visited {
-    color: blue; }
-  a:hover {
-    color: red; }
-  a:focus {
-    color: green; }
-  a:active {
-    color: purple; }
+.three-dot-spinner {
+  text-align: center; }
+  .three-dot-spinner div {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: black;
+    border-radius: 50%;
+    animation: sk-bouncedelay 1.4s infinite; }
+    .three-dot-spinner div:nth-child(1) {
+      animation-delay: -0.32s; }
+    .three-dot-spinner div:nth-child(2) {
+      animation-delay: -0.16s; }
 
-div span {
-  color: olive; }
-  div span:not(.cls) {
-    color: red; }
-  div span:first-child {
-    color: purple; }
-  div span:last-child {
-    color: skyblue; }
+@keyframes sk-bouncedelay {
+  0% {
+    transform: scale(0); }
+  40% {
+    transform: scale(1); }
+  80% {
+    transform: scale(0); }
+  100% {
+    transform: scale(0); } }
 
 /*# sourceMappingURL=styles.css.map */
