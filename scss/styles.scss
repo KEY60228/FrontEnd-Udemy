@@ -1,36 +1,257 @@
-$cBlack: black;
+@mixin animation(
+  $name,
+  $duration: 1s,
+  $timing-function: ease,
+  $delay: 0s,
+  $iteration-count: 1,
+  $direction: normal,
+  $fill-mode: forwards
+) {
+  animation: {
+    name: $name;
+    duration: $duration;
+    timing-function: $timing-function;
+    delay: $delay;
+    iteration-count: $iteration-count;
+    direction: $direction;
+    fill-mode: $fill-mode;
+  }
+}
 
-.three-dot-spinner {
-    text-align: center;
+#container {
+  text-align: center;
+  display: flex;
+  justify-content: center;
 
-    & div{
-        display: inline-block;
-        width: 18px;
-        height: 18px;
-        background-color: $cBlack;
-        border-radius: 50%;
-        animation: sk-bouncedelay 1.4s infinite;
+  & > div {
+    flex-basis: 300px;
+  }
+}
+.copyright {
+  font-size: 0.9em;
+  margin-bottom: 5rem;
+  text-align: right;
+}
 
-        @for $i from 1 through 2 {
-            &:nth-child(#{$i}) {
-                animation-delay: -0.32s / $i;
+.try {
+    
+    .spinner {
+        width: 40px;
+        height: 40px;
+        background-color: black;
+        margin: 100px auto;
+        
+        @include animation(
+            $name: sk-rotateplane2,
+            $duration: 1.20s,
+            $iteration-count: infinite,
+            $timing-function: ease-in-out,
+        );
+    }
+
+    @keyframes sk-rotateplane2 {
+        0% {
+            transform: perspective(120px) rotateX(0) rotateY(0);
+        }
+        50% {
+            transform: perspective(120px) rotateX(-180deg) rotateY(0);
+        }
+        100% {
+            transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
+        }
+    }
+
+    .double-spinner {
+        width: 40px;
+        height: 40px;
+        margin: 100px auto;
+        position: relative;
+        
+        & > div {
+            width: 100%;
+            height: 100%;
+            opacity: 0.6;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            background-color: black;
+            
+            @include animation (
+                $name: sk-bounce2,
+                $duration: 2s,
+                $iteration-count: infinite,
+                $timing-function: ease-in-out,
+            );
+
+            &:nth-child(2) {
+                animation-delay: -1s;
             }
         }
-        
+
+        @keyframes sk-bounce2 {
+            0%, 100% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+    }
+
+
+    .rect-spinner {
+        width: 50px;
+        height: 40px;
+        margin: 100px auto;
+        letter-spacing: -2px;
+
+        & > div {
+            width: 6px;
+            height: 100%;
+            display: inline-block;
+            background-color: black;
+
+            @include animation(
+                $name: sk-stratchdelay2,
+                $iteration-count: infinite,
+                $duration: 1.2s,
+                $timing-function: ease-in-out,
+            );
+
+            @for $i from 1 through 5 {
+                &:nth-child(#{$i}) {
+                    animation-delay: -1.3s + $i * 0.1s;
+                }
+            }
+        }
+    }
+
+    @keyframes sk-stratchdelay2 {
+        0%, 40%, 100% {
+            transform: scaleY(0.4);
+        }
+        20% {
+            transform: scaleY(1);
+        }
     }
 }
 
-@keyframes sk-bouncedelay {
+
+
+
+.answer {
+  .spinner {
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+
+    margin: 100px auto;
+    @include animation(
+      $name: sk-rotateplane,
+      $duration: 1.2s,
+      $iteration-count: infinite,
+      $timing-function: ease-in-out
+    );
+  }
+
+  @keyframes sk-rotateplane {
     0% {
-        transform: scale(0);
+      transform: perspective(120px) rotateX(0deg) rotateY(0deg);
     }
-    40% {
-        transform: scale(1);
-    }
-    80% {
-        transform: scale(0);
+    50% {
+      transform: perspective(120px) rotateX(-180deg) rotateY(0deg);
     }
     100% {
-        transform: scale(0);
+      transform: perspective(120px) rotateX(-180deg) rotateY(-180deg);
     }
+  }
+
+  .double-spinner {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin: 100px auto;
+
+    & > div {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: #333;
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include animation(
+        $name: sk-bounce,
+        $duration: 2s,
+        $iteration-count: infinite,
+        $timing-function: ease-in-out
+      );
+
+      &:nth-child(2) {
+        animation-delay: -1s;
+      }
+    }
+  }
+
+  @keyframes sk-bounce {
+    0%,
+    100% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1);
+    }
+  }
+
+  .rect-spinner {
+    margin: 100px auto;
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    letter-spacing: -2px;
+
+    & > div {
+      background-color: #333;
+      height: 100%;
+      width: 6px;
+      display: inline-block;
+      @include animation(
+        $name: sk-stretchdelay,
+        $duration: 1.2s,
+        $iteration-count: infinite,
+        $timing-function: ease-in-out
+      );
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          animation-delay: -1.3s + $i * 0.1s;
+        }
+      }
+      // &:nth-child(2) {
+      //   animation-delay: -1.1s;
+      // }
+      // &:nth-child(3) {
+      //   animation-delay: -1s;
+      // }
+      // &:nth-child(4) {
+      //   animation-delay: -0.9s;
+      // }
+      // &:nth-child(5) {
+      //   animation-delay: -0.8s;
+      // }
+    }
+  }
+
+  @keyframes sk-stretchdelay {
+    0%,
+    40%,
+    100% {
+      transform: scaleY(0.4);
+    }
+    20% {
+      transform: scaleY(1);
+    }
+  }
 }
