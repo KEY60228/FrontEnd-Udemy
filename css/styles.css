@@ -1,55 +1,43 @@
-html {
-  font-family: 'Teko', sans-serif; }
-  html body {
-    margin: 0; }
-    html body #container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      background-color: teal; }
-      html body #container .animate-title {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        opacity: 0;
-        font-size: 48px; }
-        html body #container .animate-title.inview {
-          opacity: 1; }
-          html body #container .animate-title.inview .char {
-            display: inline-block;
-            animation-name: kf-animate-chars;
-            animation-duration: 0.5s;
-            animation-timing-function: cubic-bezier(0.39, 1.57, 0.58, 1);
-            animation-delay: 0s;
-            animation-iteration-count: 1;
-            animation-direction: normal;
-            animation-fill-mode: both; }
-            html body #container .animate-title.inview .char:nth-child(1) {
-              animation-delay: 0.04s; }
-            html body #container .animate-title.inview .char:nth-child(2) {
-              animation-delay: 0.08s; }
-            html body #container .animate-title.inview .char:nth-child(3) {
-              animation-delay: 0.12s; }
-            html body #container .animate-title.inview .char:nth-child(4) {
-              animation-delay: 0.16s; }
-            html body #container .animate-title.inview .char:nth-child(5) {
-              animation-delay: 0.2s; }
-            html body #container .animate-title.inview .char:nth-child(6) {
-              animation-delay: 0.24s; }
-            html body #container .animate-title.inview .char:nth-child(7) {
-              animation-delay: 0.28s; }
-            html body #container .animate-title.inview .char:nth-child(8) {
-              animation-delay: 0.32s; }
-            html body #container .animate-title.inview .char:nth-child(9) {
-              animation-delay: 0.36s; }
-@keyframes kf-animate-chars {
-  0% {
-    opacity: 0;
-    transform: translateY(-50%); }
-  100% {
-    opacity: 1;
-    transform: translateY(0); } }
+.appear.up .item {
+  transform: translateY(36px); }
+
+.appear.down .item {
+  transform: translateY(-36px); }
+
+.appear.right .item {
+  transform: translateX(-36px); }
+
+.appear.left .item {
+  transform: translateX(36px); }
+
+.appear .item {
+  transition: all 0.8s;
+  opacity: 0; }
+.appear.inview .item {
+  opacity: 1;
+  transform: none; }
+  .appear.inview .item:nth-child(1) {
+    transition-delay: 0.1s; }
+  .appear.inview .item:nth-child(2) {
+    transition-delay: 0.2s; }
+  .appear.inview .item:nth-child(3) {
+    transition-delay: 0.3s; }
+  .appear.inview .item:nth-child(4) {
+    transition-delay: 0.4s; }
+  .appear.inview .item:nth-child(5) {
+    transition-delay: 0.5s; }
+  .appear.inview .item:nth-child(6) {
+    transition-delay: 0.6s; }
+  .appear.inview .item:nth-child(7) {
+    transition-delay: 0.7s; }
+  .appear.inview .item:nth-child(8) {
+    transition-delay: 0.8s; }
+  .appear.inview .item:nth-child(9) {
+    transition-delay: 0.9s; }
+  .appear.inview .item:nth-child(10) {
+    transition-delay: 1s; }
+
+img {
+  max-width: 10%; }
 
 /*# sourceMappingURL=styles.css.map */
