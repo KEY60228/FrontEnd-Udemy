@@ -2,14 +2,8 @@
 
 {
   document.addEventListener('DOMContentLoaded', function() { 
-    const ta = new TextAnimation('.animate-title');
-    const ta2 = new TextAnimation('.animate-title-2');
-    const btn = document.querySelector('#js-btn');
-
-    btn.addEventListener('click', function() {
-      ta.animate();
-      ta2.animate();
-    });
+    const ta = new TweenTextAnimation('.tween-animate-title');
+    ta.animate();
   });
 
   class TextAnimation {
@@ -17,9 +11,10 @@
     chars = '';
 
     constructor(el) {
-      this.el = document.querySelector(el);
-      this.chars = this.el.innerHTML.trim().split("");
-      this.el.innerHTML = this._splitText();
+      this.DOM = {};
+      this.DOM.el = document.querySelector(el);
+      this.chars = this.DOM.el.innerHTML.trim().split("");
+      this.DOM.el.innerHTML = this._splitText();
     }
     
     _splitText() {
@@ -35,6 +30,26 @@
 
     animate() {
       this.el.classList.toggle('inview');
+    }
+  }
+
+  class TweenTextAnimation extends TextAnimation {
+    constructor(el) {
+      super(el);
+      this.DOM.chars = this.DOM.el.querySelectorAll('.char');
+    }
+
+    animate() {
+      this.DOM.el.classList.add('inview');
+      this.DOM.chars.forEach((c, i) => {
+        TweenMax.to(c, .6, {
+          ease: Back.easeOut,
+          delay: i * .05,
+          startAt: {y: '-50%', opacity: 0},
+          y: '0%',
+          opacity: 1,
+        });
+      });
     }
   }
 }
