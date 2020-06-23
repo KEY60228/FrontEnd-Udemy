@@ -1,3 +1,61 @@
-
+html {
+  font-family: 'Teko', sans-serif; }
+  html body {
+    margin: 0; }
+    html body #container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background-color: teal; }
+      html body #container .animate-title, html body #container .animate-title-2 {
+        color: white;
+        opacity: 0;
+        font-size: 48px; }
+        html body #container .animate-title.inview, html body #container .animate-title-2.inview {
+          opacity: 1; }
+          html body #container .animate-title.inview .char, html body #container .animate-title-2.inview .char {
+            display: inline-block;
+            animation-name: kf-animate-chars;
+            animation-duration: 0.5s;
+            animation-timing-function: cubic-bezier(0.39, 1.57, 0.58, 1);
+            animation-delay: 0s;
+            animation-iteration-count: 1;
+            animation-direction: normal;
+            animation-fill-mode: both; }
+            html body #container .animate-title.inview .char:nth-child(1), html body #container .animate-title-2.inview .char:nth-child(1) {
+              animation-delay: 0.04s; }
+            html body #container .animate-title.inview .char:nth-child(2), html body #container .animate-title-2.inview .char:nth-child(2) {
+              animation-delay: 0.08s; }
+            html body #container .animate-title.inview .char:nth-child(3), html body #container .animate-title-2.inview .char:nth-child(3) {
+              animation-delay: 0.12s; }
+            html body #container .animate-title.inview .char:nth-child(4), html body #container .animate-title-2.inview .char:nth-child(4) {
+              animation-delay: 0.16s; }
+            html body #container .animate-title.inview .char:nth-child(5), html body #container .animate-title-2.inview .char:nth-child(5) {
+              animation-delay: 0.2s; }
+            html body #container .animate-title.inview .char:nth-child(6), html body #container .animate-title-2.inview .char:nth-child(6) {
+              animation-delay: 0.24s; }
+            html body #container .animate-title.inview .char:nth-child(7), html body #container .animate-title-2.inview .char:nth-child(7) {
+              animation-delay: 0.28s; }
+            html body #container .animate-title.inview .char:nth-child(8), html body #container .animate-title-2.inview .char:nth-child(8) {
+              animation-delay: 0.32s; }
+            html body #container .animate-title.inview .char:nth-child(9), html body #container .animate-title-2.inview .char:nth-child(9) {
+              animation-delay: 0.36s; }
+            html body #container .animate-title.inview .char:nth-child(10), html body #container .animate-title-2.inview .char:nth-child(10) {
+              animation-delay: 0.4s; }
+            html body #container .animate-title.inview .char:nth-child(11), html body #container .animate-title-2.inview .char:nth-child(11) {
+              animation-delay: 0.44s; }
+            html body #container .animate-title.inview .char:nth-child(12), html body #container .animate-title-2.inview .char:nth-child(12) {
+              animation-delay: 0.48s; }
+            html body #container .animate-title.inview .char:nth-child(13), html body #container .animate-title-2.inview .char:nth-child(13) {
+              animation-delay: 0.52s; }
+            html body #container .animate-title.inview .char:nth-child(14), html body #container .animate-title-2.inview .char:nth-child(14) {
+              animation-delay: 0.56s; }
+@keyframes kf-animate-chars {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%); }
+  100% {
+    opacity: 1;
+    transform: translateY(0); } }
 
 /*# sourceMappingURL=styles.css.map */
