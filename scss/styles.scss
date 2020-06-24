@@ -1,145 +1,64 @@
-@import "mixin";
+@import 'mixin';
 
-img {
-  max-width: 100%;
-  vertical-align: bottom;
-}
+html {
+  font-family: 'Teko', sans-serif;
 
-.cover-slide {
-  position: relative;
-  overflow: hidden;
-
-  &::after {
-    content: "";
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #eaebe6;
-    opacity: 0;
-  }
-  &.inview {
-    &::after {
-      opacity: 1;
-
-      @include animation(
-        $name: kf-cover-slide,
-        $duration: 1.6s,
-        $timing-function: ease-in-out
-      );
-    }
-  }
-}
-
-@keyframes kf-cover-slide {
-  0% {
-    transform-origin: left;
-    transform: scaleX(0);
-  }
-  50% {
-    transform-origin: left;
-    transform: scaleX(1);
-  }
-  50.1% {
-    transform-origin: right;
-    transform: scaleX(1);
-  }
-  100% {
-    transform-origin: right;
-    transform: scaleX(0);
-  }
-}
-
-// @keyframes kf-cover-slide {
-//   0% {
-//     left: 0;
-//     right: 100%;
-//   }
-//   50% {
-//     left: 0;
-//     right: 0;
-//   }
-//   100% {
-//     left: 100%;
-//     right: 0;
-//   }
-// }
-
-.img-zoom {
-  opacity: 0;
-
-  .inview & {
-    opacity: 1;
-    transition: transform 0.3s ease;
-    @include animation(
-      $name: kf-img-show,
-      $duration: 1.6s,
-      $timing-function: ease-in-out,
-      $fill-mode: normal,
-    );
-
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-}
-
-@keyframes kf-img-show {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  50.1% {
-    opacity: 1;
-    transform: scale(1.5);
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.hover-darken {
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    transition: background-color 0.3s ease;
-    pointer-events: none;
-    @include animation(
-      $name: kf-img-show,
-      $duration: 1.6s,
-      $timing-function: ease-in-out,
-      $fill-mode: normal
-    );
-  }
-  &:hover::before {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-}
-
-.bg-img-zoom {
-  background-image: url(images/image-1.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  width: 100%;
-  @extend .img-zoom;
-}
-
-.img-bg50 {
-  position: relative;
+  body {
+    margin: 0;
+    
+    #container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background-color: teal;
+      
+      .animate-title, .tween-animate-title {
+        // position: absolute;
+        // top: 50%;
+        // left: 50%;
+        // transform: translate(-50%, -50%);
+        color: white;
+        opacity: 0;
+        font-size: 48px;
   
-  &::before {
-    display: block;
-    content: '';
-    padding-top: 50%;
+        &.inview {
+          opacity: 1;
+  
+          & .char {
+            display: inline-block;
+            
+            @for $i from 1 through 30 {
+              &:nth-child(#{$i}) {
+                animation-delay: $i * 0.04s;
+              }
+            }
+          }
+        }
+        
+        & .char {
+          opacity: 0;
+        }
+      }
+
+      .animate-title.inview .char{
+        @include animation(
+          $name: kf-animate-chars,
+          $duration: 0.5s,
+          $timing-function: cubic-bezier(0.39, 1.57, 0.58, 1),
+          $fill-mode: both,
+        );
+      }
+    }
+  }
+  
+  @keyframes kf-animate-chars {
+    0% {
+      opacity: 0;
+      transform: translateY(-50%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
