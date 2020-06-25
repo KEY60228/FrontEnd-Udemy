@@ -13,16 +13,10 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 {
-    document.addEventListener('DOMContentLoaded', function () {
-        var ta = new TweenTextAnimation_1('.tween-animate-title');
-        ta.animate();
-    });
     var TextAnimation = /** @class */ (function () {
         function TextAnimation(el) {
-            this.el = '';
-            this.chars = '';
             this.DOM = {};
-            this.DOM.el = document.querySelector(el);
+            this.DOM.el = el instanceof HTMLElement ? el : document.querySelector(el);
             this.chars = this.DOM.el.innerHTML.trim().split("");
             this.DOM.el.innerHTML = this._splitText();
         }
@@ -32,15 +26,12 @@ var __extends = (this && this.__extends) || (function () {
                 return acc + "<span class=\"char\">" + curr + "</span>";
             }, "");
         };
-        TextAnimation.prototype.log = function () {
-            console.log(this.el);
-        };
         TextAnimation.prototype.animate = function () {
-            this.el.classList.toggle('inview');
+            this.DOM.el.classList.toggle('inview');
         };
         return TextAnimation;
     }());
-    var TweenTextAnimation_1 = /** @class */ (function (_super) {
+    var TweenTextAnimation = /** @class */ (function (_super) {
         __extends(TweenTextAnimation, _super);
         function TweenTextAnimation(el) {
             var _this = _super.call(this, el) || this;
@@ -61,4 +52,27 @@ var __extends = (this && this.__extends) || (function () {
         };
         return TweenTextAnimation;
     }(TextAnimation));
+}
+{
+    document.addEventListener('DOMContentLoaded', function () {
+        var els = document.querySelectorAll('.animate-title');
+        var cb = function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var ta = new TextAnimation(entry.target);
+                    ta.animate();
+                    observer.unobserve(entry.target);
+                }
+                else {
+                }
+            });
+        };
+        var options = {
+            root: null,
+            rootMargin: "0px",
+            threshold: 0
+        };
+        var io = new IntersectionObserver(cb, options);
+        els.forEach(function (el) { return io.observe(el); });
+    });
 }
