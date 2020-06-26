@@ -8,10 +8,10 @@
       this.DOM.el.innerHTML = this._splitText();
     }
     _splitText() {
-        return this.chars.reduce((acc, curr) => {
-          curr = curr.replace(/\s+/, '&nbsp;');
-          return `${acc}<span class="char">${curr}</span>`;
-        }, "");
+      return this.chars.reduce((acc, curr) => {
+        curr = curr.replace(/\s+/, '&nbsp;');
+        return `${acc}<span class="char">${curr}</span>`;
+      }, "");
     }
     animate() {
       this.DOM.el.classList.toggle('inview');
@@ -26,13 +26,13 @@
     animate() {
       this.DOM.el.classList.add('inview');
       this.DOM.chars.forEach((c, i) => {
-          TweenMax.to(c, .6, {
-              ease: Back.easeOut,
-              delay: i * .05,
-              startAt: { y: '-50%', opacity: 0},
-              y: '0%',
-              opacity: 1
-          });
+        TweenMax.to(c, .6, {
+          ease: Back.easeOut,
+          delay: i * .05,
+          startAt: { y: '-50%', opacity: 0},
+          y: '0%',
+          opacity: 1
+        });
       });
     }
   }
@@ -40,23 +40,52 @@
 
 {
   document.addEventListener('DOMContentLoaded', function () {
-    const els = document.querySelectorAll('.animate-title');
-    const cb = function (entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const ta = new TextAnimation(entry.target);
-                ta.animate();
-                observer.unobserve(entry.target);
-            } else {
-            }
-        });
-    };
-    const options = {
+    const cb = function (el, isIntersecting) {
+      if (isIntersecting) {
+        el.classList.add('inview');
+      }
+    }
+    const so = new ScrollObserver('.cover-slide', cb, null);
+  });
+}
+
+{
+  class ScrollObserver {
+    constructor(els, cb, options) {
+      this.els = document.querySelectorAll(els);
+      const defaultOptions = {
         root: null,
         rootMargin: "0px",
-        threshold: 0
-    };
-    const io = new IntersectionObserver(cb, options);
-    els.forEach(el => io.observe(el));
-  });
+        threshold: 0,
+        once: true,
+      };
+      this.cb = cb;
+      this.options = Object.assign(defaultOptions, options);
+      this.once = this.options.once;
+      this._init();
+    }
+
+    _init() {
+      const callback = function (entries, observer) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.cb(entry.target, true);
+            if (this.once) {
+              observer.unobserve(entry.target);
+            }
+          } else {
+            this.cb(entry.target, false);
+          }
+        });
+      };
+
+      this.io = new IntersectionObserver(callback.bind(this), this.options);
+
+      this.els.forEach(el => this.io.observe(el));
+    }
+
+    destroy() {
+      this.io.disconnect();
+    }
+  }
 }
