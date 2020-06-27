@@ -1,55 +1,70 @@
-.pace-done #global-container {
-  transition: opacity 1s;
-  opacity: 1; }
+.swiper-slide {
+  height: 500px;
+  overflow: hidden; }
+  .swiper-slide > img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    transform: scale(1.3);
+    transition: transform 1.9s ease; }
+  .swiper-slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 61, 125, 0.1); }
+  .swiper-slide-active > img {
+    transform: none; }
+  .swiper-slide-active .hero__title {
+    opacity: 1;
+    transform: translate(-50%, -50%); }
 
-#global-container {
-  opacity: 0; }
-
-.pace {
-  z-index: 2000;
-  position: fixed;
-  margin: auto;
-  top: 0;
+.hero__title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% + 20px));
+  color: white;
+  font-size: 25px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s ease 1s, transform 0.3s ease 1s; }
+.hero__footer {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  z-index: 2;
+  height: 68px;
+  width: 22px;
+  overflow: hidden; }
+.hero__downarrow {
+  position: absolute;
   left: 0;
-  right: 0;
   bottom: 0;
-  width: 100px;
-  height: 100px; }
-
-.pace .pace-progress {
-  transform: none !important;
-  text-align: center; }
-
-.pace .pace-progress:after {
-  content: attr(data-progress-text);
-  display: block;
-  font-weight: 100;
-  font-size: 2em;
-  font-family: 'Helvetica Neue', 'Yu Gothic', 'Meiryo', sans-serif;
-  color: #535353; }
-
-.pace.pace-inactive {
-  display: none; }
-
-.pace-progress-inner {
-  width: 40px;
-  height: 40px;
-  background-color: #904669;
-  margin: 0 auto;
-  animation-name: sk-rotateplane;
-  animation-duration: 1.2s;
-  animation-timing-function: ease-in-out;
+  width: 6px;
+  animation-name: kf-arrow-anime;
+  animation-duration: 2s;
+  animation-timing-function: linear;
   animation-delay: 0s;
   animation-iteration-count: infinite;
   animation-direction: normal;
   animation-fill-mode: forwards; }
+.hero__scrolltext {
+  position: absolute;
+  transform: rotate(90deg);
+  color: rgba(255, 255, 255, 0.7);
+  left: -8px;
+  top: 11px;
+  font-size: 1.2em; }
 
-@keyframes sk-rotateplane {
-  0% {
-    transform: perspective(120px) rotateX(0deg) rotateY(0deg); }
-  50% {
-    transform: perspective(120px) rotateX(-180deg) rotateY(0deg); }
-  100% {
-    transform: perspective(120px) rotateX(-180deg) rotateY(-180deg); } }
+@keyframes kf-arrow-anime {
+  0%, 50%, 100% {
+    transform: translateY(-10%); }
+  30% {
+    transform: none; } }
 
 /*# sourceMappingURL=styles.css.map */
