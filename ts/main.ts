@@ -1,55 +1,50 @@
 'use strict';
 
 {
-  document.addEventListener('DOMContentLoaded', function() { 
-    const ta = new TweenTextAnimation('.tween-animate-title');
-    ta.animate();
+  document.addEventListener('DOMContentLoaded', function() {
+    const hero = new HeroSlider('.swiper-container');
+    hero.start({delay: 2000});
+    setTimeout(() => {
+      hero.stop();
+    }, 5000);
   });
 
-  class TextAnimation {
-    el = '';
-    chars = '';
-
+  class HeroSlider {
     constructor(el) {
-      this.DOM = {};
-      this.DOM.el = document.querySelector(el);
-      this.chars = this.DOM.el.innerHTML.trim().split("");
-      this.DOM.el.innerHTML = this._splitText();
-    }
-    
-    _splitText() {
-      return this.chars.reduce(function(acc, curr) {
-        curr = curr.replace(/\s+/, '&nbsp;');
-        return `${acc}<span class="char">${curr}</span>`;
-      }, "");
+      this.el = el;
+      this.swiper = this._initSwiper();
     }
 
-    log() {
-      console.log(this.el);
-    }
-
-    animate() {
-      this.el.classList.toggle('inview');
-    }
-  }
-
-  class TweenTextAnimation extends TextAnimation {
-    constructor(el) {
-      super(el);
-      this.DOM.chars = this.DOM.el.querySelectorAll('.char');
-    }
-
-    animate() {
-      this.DOM.el.classList.add('inview');
-      this.DOM.chars.forEach((c, i) => {
-        TweenMax.to(c, .6, {
-          ease: Back.easeOut,
-          delay: i * .05,
-          startAt: {y: '-50%', opacity: 0},
-          y: '0%',
-          opacity: 1,
-        });
+    _initSwiper() {
+      return new Swiper (this.el, {
+        // Optional parameters
+        // direction: 'vertical',
+        loop: true,
+        grabCursor: true,
+        effext: 'coverflow',
+        centeredSlides: true,
+        slidesPerView: 1,
+        speed: 1000,
+        breakpoints: {
+          1024: {
+            slidesPerView: 2,
+          }
+        },
       });
+    }
+
+    start(options = {}) {
+      options = Object.assign({
+        delay: 4000,
+        disableOnInteraction: false,
+      }, options);
+
+      this.swiper.params.autoplay = options
+      this.swiper.autoplay.start();
+    }
+
+    stop() {
+      this.swiper.autoplay.stop();
     }
   }
 }

@@ -1,64 +1,46 @@
 'use strict';
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 {
     document.addEventListener('DOMContentLoaded', function () {
-        var ta = new TweenTextAnimation_1('.tween-animate-title');
-        ta.animate();
+        var hero = new HeroSlider_1('.swiper-container');
+        hero.start({ delay: 2000 });
+        setTimeout(function () {
+            hero.stop();
+        }, 5000);
     });
-    var TextAnimation = /** @class */ (function () {
-        function TextAnimation(el) {
-            this.el = '';
-            this.chars = '';
-            this.DOM = {};
-            this.DOM.el = document.querySelector(el);
-            this.chars = this.DOM.el.innerHTML.trim().split("");
-            this.DOM.el.innerHTML = this._splitText();
+    var HeroSlider_1 = /** @class */ (function () {
+        function HeroSlider(el) {
+            this.el = el;
+            this.swiper = this._initSwiper();
         }
-        TextAnimation.prototype._splitText = function () {
-            return this.chars.reduce(function (acc, curr) {
-                curr = curr.replace(/\s+/, '&nbsp;');
-                return acc + "<span class=\"char\">" + curr + "</span>";
-            }, "");
-        };
-        TextAnimation.prototype.log = function () {
-            console.log(this.el);
-        };
-        TextAnimation.prototype.animate = function () {
-            this.el.classList.toggle('inview');
-        };
-        return TextAnimation;
-    }());
-    var TweenTextAnimation_1 = /** @class */ (function (_super) {
-        __extends(TweenTextAnimation, _super);
-        function TweenTextAnimation(el) {
-            var _this = _super.call(this, el) || this;
-            _this.DOM.chars = _this.DOM.el.querySelectorAll('.char');
-            return _this;
-        }
-        TweenTextAnimation.prototype.animate = function () {
-            this.DOM.el.classList.add('inview');
-            this.DOM.chars.forEach(function (c, i) {
-                TweenMax.to(c, .6, {
-                    ease: Back.easeOut,
-                    delay: i * .05,
-                    startAt: { y: '-50%', opacity: 0 },
-                    y: '0%',
-                    opacity: 1
-                });
+        HeroSlider.prototype._initSwiper = function () {
+            return new Swiper(this.el, {
+                // Optional parameters
+                // direction: 'vertical',
+                loop: true,
+                grabCursor: true,
+                effext: 'coverflow',
+                centeredSlides: true,
+                slidesPerView: 1,
+                speed: 1000,
+                breakpoints: {
+                    1024: {
+                        slidesPerView: 2
+                    }
+                }
             });
         };
-        return TweenTextAnimation;
-    }(TextAnimation));
+        HeroSlider.prototype.start = function (options) {
+            if (options === void 0) { options = {}; }
+            options = Object.assign({
+                delay: 4000,
+                disableOnInteraction: false
+            }, options);
+            this.swiper.params.autoplay = options;
+            this.swiper.autoplay.start();
+        };
+        HeroSlider.prototype.stop = function () {
+            this.swiper.autoplay.stop();
+        };
+        return HeroSlider;
+    }());
 }
