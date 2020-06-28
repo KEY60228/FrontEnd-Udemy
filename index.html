@@ -2,35 +2,33 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="./css/styles.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Teko:wght@500&display=swap">
-  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Udemy</title>
+  <link  rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kameron:wght@400;700&family=Noto+Sans+JP&display=swap">
+  <link rel="stylesheet" href="css/vendors/bootstrap-reboot.css"> 
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css"> 
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <div id="global-container">
     <div id="container">
       <div id="content">
-        <div class="hero"></div>
-        <!-- Slider main container -->
-        <div class="swiper-container">
-          <!-- Additional required wrapper -->
-          <div class="swiper-wrapper">
-            <!-- Slides -->
-            <div class="swiper-slide">
-              <div class="hero__title">Enjoy Rich</div>
-              <img src="images/villa-1.jpg">
+        <div class="hero">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="hero__title">Enjoy Rich</div>
+                <img src="images/image-1.jpg" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <div class="hero__title">Fantastic</div>
+                <img src="images/image-2.jpg" alt="" />
+              </div>
+              <div class="swiper-slide">
+                <div class="hero__title">Experience</div>
+                <img src="images/image-3.jpg" alt="" />
+              </div>
             </div>
-            <div class="swiper-slide">
-              <div class="hero__title">Fantastic</div>
-              <img src="images/villa-2.jpg">
-            </div>
-            <div class="swiper-slide">
-              <div class="hero__title">Experience</div>
-              <img src="images/villa-3.jpg">
-            </div>
-          </div>
-          <div>
             <div class="hero__footer">
               <img class="hero__downarrow" src="images/arrow.svg">
               <span class="hero__scrolltext">scroll</span>
@@ -40,8 +38,8 @@
       </div>
     </div>
   </div>
-
   <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
-  <script src="./js/main.js"></script>
+  <script src="js/libs/hero-slider.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
