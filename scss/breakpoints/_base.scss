@@ -74,6 +74,24 @@ img {
     justify-content: space-between;
     padding: 15px;
     background-color: $cBgGray;
+    z-index: 0;
+    position: relative;
+  }
+
+  &__title {
+    position: relative;
+    @include p-base($display: none, $width: 100px, $height: 1px, $top: 50%, $left: -120px) {
+      background-color: $cBlack;
+      transform: translateY(-50%) scaleX(0);
+      transition: transform 0.3s ease 1.6s;
+      transform-origin: right;
+    }
+    
+    &.inview {
+      &::before {
+        transform: translateY(-50%);
+      }
+    }
   }
 
   &__texts {
@@ -87,11 +105,18 @@ img {
   &__img {
     height: 300px;
     @extend .mb-sm;
+    transition: box-shadow 1ms linear 0.8s;
     
     & > img {
       object-fit: cover;
       width: 100%;
       height: 100%;
+      z-index: -1;
+      position: relative;
+    }
+
+    &.inview {
+      box-shadow: inset 0 0 30px $cBlack;
     }
   }
 }
@@ -161,5 +186,51 @@ img {
       height: 100%;
       width: 100%;
     }
+  }
+}
+
+.logo {
+  font-size: 42px;
+  display: flex;;
+
+  &__img {
+    width: 0.7em;
+  }
+
+  &__world {
+    color: $cWineRed
+  }
+}
+
+.footer {
+  padding: 60px 0;
+  @extend .content-width;
+
+  &__nav {
+    @extend .flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__ul {
+    @extend .flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  &__li {
+    padding: 0;
+    margin: 10px;
+    
+    & > a {
+      color: $cSubTitle;
+    }
+  }
+  
+  & .logo {
+    font-size: 38px;
+    justify-content: center;
   }
 }
