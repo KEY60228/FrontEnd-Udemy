@@ -18,4 +18,16 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     };
     var so2 = new ScrollObserver('.cover-slide', _inviewAnimation);
+    var header = document.querySelector('.header');
+    ;
+    var _navAnimation = function (el, inview) {
+        if (inview) {
+            header.classList.remove('triggered');
+        }
+        else {
+            header.classList.add('triggered');
+        }
+    };
+    var so3 = new ScrollObserver('.nav-trigger', _navAnimation, { once: false });
+    new MobileMenu();
 });
