@@ -24,3 +24,45 @@ Stylesheet: 960px以上のモニタで適用
 .pb-lg {
   padding-bottom: 150px !important
 }
+
+.header {
+  &__nav {
+    display: block;
+  }
+}
+
+.mobile-menu {
+  &__btn {
+    display: none;
+  }
+}
+
+.travel {
+  &__img {
+    height: 400px;
+  }
+
+  &__description {
+    margin-bottom: 40px;
+  }
+
+  &__title {
+    &::before {
+      display: block;
+    }
+  }
+}
+
+.popular {
+  &__item {
+    flex-basis: 25%;
+  }
+
+  &__img {
+    height: 335px;
+  }
+}
+
+.swiper-slide {
+  box-shadow: 0 8px 40px -10px rgba(0, 0, 0, 0.8);
+}
